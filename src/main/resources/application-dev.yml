@@ -38,7 +38,7 @@ spring:
       validation-timeout: 3000
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     generate-ddl: false
     show-sql: true
     properties:
