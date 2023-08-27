@@ -1,0 +1,53 @@
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
+    '[org.springframework.boot.context]': INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+      #Caso você queira que todos os endpoints não venham habilitados por default, você pode adicionar a seguinte linha:
+      #enabled-by-default:
+server:
+  compression:
+    enabled: true
+  port: 8080
+  servlet:
+    context-path: /ms-agendamento-tarefa
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    #Configurando o pool de conexões
+    hikari:
+      connection-timeout: 30000 # maximum number of milliseconds that a client will wait for a connection
+      idle-timeout: 600000      # maximum idle time for connection
+      max-lifetime: 1800000     # maximum lifetime in milliseconds of a connection in the pool after it is closed.
+      maximum-pool-size: 40
+      minimum-idle: 8
+      validation-timeout: 3000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: true
+    properties:
+      '[format_sql]': true
+    open-in-view: false
+springfox:
+  documentation:
+    info:
+      title: Microsserviço-agendamento-tarefa
+      description: ms-agendamento-tarefa API Docs.
+      version: 1.0
+    base-package: br.com.agendamento.api
