@@ -9,21 +9,17 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "usuarios")
-@Getter
-@Setter
+@Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id_usuario;
 	
 	@NotBlank
 	private String nome;
@@ -33,5 +29,7 @@ public class Usuario {
 	
 	@NotBlank
 	private String senha;
+	
+	private Long id_status;
 
 }

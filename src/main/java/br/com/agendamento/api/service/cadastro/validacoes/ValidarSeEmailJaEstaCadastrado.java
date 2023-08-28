@@ -14,7 +14,7 @@ public class ValidarSeEmailJaEstaCadastrado implements ValidacaoCadastro {
 	
 	@Override
 	public void validar(CadastroUsuarioDTO dto) {
-		if(repository.findByEmail(dto.getEmail()) != null) {
+		if(repository.existsByEmail(dto.getEmail())) {
 			throw new RuntimeException("Email já cadastrado");
 		}
 		

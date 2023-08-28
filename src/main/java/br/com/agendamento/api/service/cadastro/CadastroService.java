@@ -12,6 +12,10 @@ import br.com.agendamento.api.model.Usuario;
 import br.com.agendamento.api.repository.UsuarioRepository;
 import br.com.agendamento.api.service.cadastro.validacoes.ValidacaoCadastro;
 
+/**
+ * Classe de serviço responsável por cadastrar um usuário
+ * @author moriartynho
+ */
 @Service
 public class CadastroService {
 
@@ -26,7 +30,7 @@ public class CadastroService {
 
 	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) {
 		this.validacoes.forEach(v -> v.validar(dto));
-		Usuario obj = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha());
+		Usuario obj = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), 1L);
 		repository.save(obj);
 	}
 
