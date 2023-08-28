@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class ResolveExceptionHandler{
@@ -23,11 +24,11 @@ public class ResolveExceptionHandler{
 	 *            ( doGet, doPost, etc).
 	 * @return ResponseEntity<ResponseMessageError>
 	 */
-	@ExceptionHandler(InternalErrorException.class)
-	public ResponseEntity<ResponseMessageError> handleInternalError(InternalErrorException e, HttpServletRequest request) {
-		return popularResponseMessageError(e, HttpStatus.INTERNAL_SERVER_ERROR.value(),
-				messages.get("messages.handler.titulo.internalerror"), request);
-	}
+//	@ExceptionHandler(InternalErrorException.class)
+//	public ResponseEntity<ResponseMessageError> handleInternalError(InternalErrorException e, HttpServletRequest request) {
+//		return popularResponseMessageError(e, HttpStatus.INTERNAL_SERVER_ERROR.value(),
+//				messages.get("messages.handler.titulo.internalerror"), request);
+//	}
 
 	/**
 	 * Captura as Exceções do ValidationException
@@ -41,7 +42,7 @@ public class ResolveExceptionHandler{
 	 */
 	@ExceptionHandler(ValidationException.class)
 	public ResponseEntity<ResponseMessageError> handleValidation(ValidationException e, HttpServletRequest request) {
-		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), messages.get("messages.handler.titulo.validation"), request);
+		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
 	}
 
 	/**
@@ -56,8 +57,22 @@ public class ResolveExceptionHandler{
 	 */
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ResponseMessageError> handleException(Exception e, HttpServletRequest request) {
-		return popularResponseMessageError(e, HttpStatus.INTERNAL_SERVER_ERROR.value(), messages.get("messages.handler.titulo.exception"),
+		return popularResponseMessageError(e, HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(),
 				request);
+	}
+	
+	/**
+	 * Captura as exceções do ValidaçãoException
+	 * @param e
+	 *            exceção que ocorreu ao axecutar alguma ação no sistema
+	 * @param request
+	 *            O contêiner do servlet cria um HttpServletRequest objeto e o passa como um argumento para os métodos de serviço do servlet
+	 *            ( doGet, doPost, etc).
+	 * @return ResponseEntity<ResponseMessageError>
+	 */
+	@ExceptionHandler(ValidacaoException.class)
+	public ResponseEntity<ResponseMessageError> handleValidacaoException(ValidacaoException e, HttpServletRequest request){
+		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
 	}
 
 	/**

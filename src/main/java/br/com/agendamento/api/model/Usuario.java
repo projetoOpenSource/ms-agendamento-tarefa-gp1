@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Usuario {
 	@NotBlank
 	private String senha;
 	
+	@NotNull
 	private Long id_status;
 
 }

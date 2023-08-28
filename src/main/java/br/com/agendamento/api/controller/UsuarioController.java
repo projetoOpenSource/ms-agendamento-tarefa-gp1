@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.agendamento.api.dto.CadastroUsuarioDTO;
 import br.com.agendamento.api.dto.UsuarioDTO;
+import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.service.cadastro.CadastroService;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -35,9 +36,10 @@ public class UsuarioController {
 	 * 
 	 * Endpoint para cadastrar um usuário
 	 * @param novoUsuario
+	 * @throws ValidacaoException 
 	 */
 	@PostMapping()
-	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody @Valid CadastroUsuarioDTO novoUsuario){
+	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody @Valid CadastroUsuarioDTO novoUsuario) throws ValidacaoException{
 		cadastroService.cadastrarUsuario(novoUsuario);
 		return ResponseEntity.ok().build();
 	}
