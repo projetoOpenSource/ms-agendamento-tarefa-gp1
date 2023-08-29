@@ -21,6 +21,11 @@ public class CadastroService {
 	@Autowired
 	private UsuarioRepository repository;
 
+	/**
+	 * Método de cadastro de usuário
+	 * @param dto
+	 * @throws ValidacaoException
+	 */
 	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) throws ValidacaoException {
 		
 		if (repository.existsByEmail(dto.getEmail())) {

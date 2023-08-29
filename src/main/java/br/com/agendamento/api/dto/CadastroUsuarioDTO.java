@@ -1,6 +1,5 @@
 package br.com.agendamento.api.dto;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -23,11 +22,11 @@ public class CadastroUsuarioDTO {
 	private String email;
 	
 	@NotBlank(message = "Senha não pode ser nulo")
-	@Min(value = 6, message = "Senha deve ter pelo menos 6 caracteres")
+	@Size(min = 6, message = "Senha deve ter pelo menos 6 caracteres")
 	private String senha;
 	
 	@NotBlank(message = "Confirme a senha")
-	@Min(value = 6, message = "Senha deve ter pelo menos 6 caracteres")
+	@Size(min = 6, message = "Senha deve ter pelo menos 6 caracteres")
 	private String confirmarSenha;
 
 }

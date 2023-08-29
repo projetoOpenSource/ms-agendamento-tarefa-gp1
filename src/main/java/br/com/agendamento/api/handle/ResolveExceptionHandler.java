@@ -1,4 +1,4 @@
-package br.com.agendamento.api.exceptions;
+package br.com.agendamento.api.handle;
 
 import java.time.Instant;
 
@@ -7,15 +7,16 @@ import javax.validation.ValidationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.*;
+import org.springframework.web.bind.annotation.*;
+
+import br.com.agendamento.api.exceptions.InternalErrorException;
+import br.com.agendamento.api.exceptions.ValidacaoException;
 
 @ControllerAdvice
-public class ResolveExceptionHandler{
+public class ResolveExceptionHandler {
 	
-	/** 
+	/**
 	 * Captura as Exceções do InternalErrorException
 	 * 
 	 * @param e
@@ -25,11 +26,11 @@ public class ResolveExceptionHandler{
 	 *            ( doGet, doPost, etc).
 	 * @return ResponseEntity<ResponseMessageError>
 	 */
-//	@ExceptionHandler(InternalErrorException.class)
-//	public ResponseEntity<ResponseMessageError> handleInternalError(InternalErrorException e, HttpServletRequest request) {
-//		return popularResponseMessageError(e, HttpStatus.INTERNAL_SERVER_ERROR.value(),
-//				messages.get("messages.handler.titulo.internalerror"), request);
-//	}
+	@ExceptionHandler(InternalErrorException.class)
+	public ResponseEntity<ResponseMessageError> handleInternalError(InternalErrorException e, HttpServletRequest request) {
+		return popularResponseMessageError(e, HttpStatus.INTERNAL_SERVER_ERROR.value(),
+				"Ocorreu um erro interno: " + e.getMessage(), request);
+	}
 
 	/**
 	 * Captura as Exceções do ValidationException
@@ -43,7 +44,7 @@ public class ResolveExceptionHandler{
 	 */
 	@ExceptionHandler(ValidationException.class)
 	public ResponseEntity<ResponseMessageError> handleValidation(ValidationException e, HttpServletRequest request) {
-		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
+		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), "Erro de validação: " + e.getMessage(), request);
 	}
 
 	/**
@@ -86,7 +87,6 @@ public class ResolveExceptionHandler{
 	 *            ( doGet, doPost, etc).
 	 * @return ResponseEntity<ResponseMessageError>
 	 */
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ResponseMessageError> handleValidateException(MethodArgumentNotValidException e, HttpServletRequest request){
 		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);

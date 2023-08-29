@@ -1,5 +1,6 @@
 package br.com.agendamento.api.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,8 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_usuario;
+	@Column(name = "id_usuario")
+	private Long id_Usuario;
 	
 	@NotBlank(message = "Nome não pode ser nulo")
 	@Max(value = 50, message = "Nome não pode ter mais que 50 caracteres")
@@ -34,6 +36,7 @@ public class Usuario {
 	private String senha;
 	
 	@NotNull
-	private Long id_status;
+	@Column(name = "id_Status")
+	private Long id_Status;
 
 }

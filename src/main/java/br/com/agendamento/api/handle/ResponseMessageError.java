@@ -1,14 +1,16 @@
-package br.com.agendamento.api.exceptions;
+package br.com.agendamento.api.handle;
 
 import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class ResponseMessageError {
 
 	private Instant timestamp;

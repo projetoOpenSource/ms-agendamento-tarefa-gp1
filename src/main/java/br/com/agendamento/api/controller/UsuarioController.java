@@ -35,7 +35,8 @@ public class UsuarioController {
 	/**
 	 * 
 	 * Endpoint para cadastrar um usuário
-	 * @param novoUsuario
+	 * @param novoUsuario 
+	 * 			Recebe um objeto com dados para o cadastro de um novo usuário
 	 * @throws ValidacaoException 
 	 */
 	@PostMapping()
