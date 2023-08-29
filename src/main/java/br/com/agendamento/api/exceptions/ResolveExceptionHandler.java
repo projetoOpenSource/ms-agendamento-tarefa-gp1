@@ -7,6 +7,7 @@ import javax.validation.ValidationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ResolveExceptionHandler{
 	
-	/**
+	/** 
 	 * Captura as Exceções do InternalErrorException
 	 * 
 	 * @param e
@@ -62,7 +63,7 @@ public class ResolveExceptionHandler{
 	}
 	
 	/**
-	 * Captura as exceções do ValidaçãoException
+	 * Captura as exceções do ValidacaoException
 	 * @param e
 	 *            exceção que ocorreu ao axecutar alguma ação no sistema
 	 * @param request
@@ -74,6 +75,22 @@ public class ResolveExceptionHandler{
 	public ResponseEntity<ResponseMessageError> handleValidacaoException(ValidacaoException e, HttpServletRequest request){
 		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
 	}
+	
+	/**
+	 * 
+	 *	Captura as exceções do MethodArgumentNotValidException
+	 * @param e
+	 *            exceção que ocorreu ao axecutar alguma ação no sistema
+	 * @param request
+	 *            O contêiner do servlet cria um HttpServletRequest objeto e o passa como um argumento para os métodos de serviço do servlet
+	 *            ( doGet, doPost, etc).
+	 * @return ResponseEntity<ResponseMessageError>
+	 */
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ResponseMessageError> handleValidateException(MethodArgumentNotValidException e, HttpServletRequest request){
+		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
+	} 
 
 	/**
 	 * Método que popula o response para cada exceção.

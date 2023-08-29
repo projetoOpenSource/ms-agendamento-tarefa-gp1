@@ -39,7 +39,7 @@ public class UsuarioController {
 	 * @throws ValidacaoException 
 	 */
 	@PostMapping()
-	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody @Valid CadastroUsuarioDTO novoUsuario) throws ValidacaoException{
+	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@Valid @RequestBody CadastroUsuarioDTO novoUsuario) throws ValidacaoException{
 		cadastroService.cadastrarUsuario(novoUsuario);
 		return ResponseEntity.ok().build();
 	}
