@@ -7,6 +7,11 @@ import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Classe de transferência que retorna os dados de um usuário
+ * @author moriartynho
+ *
+ */
 @Data
 @AllArgsConstructor
 public class UsuarioDTO {

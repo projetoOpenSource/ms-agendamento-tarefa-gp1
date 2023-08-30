@@ -38,6 +38,7 @@ public class UsuarioController {
 	 * @param novoUsuario 
 	 * 			Recebe um objeto com dados para o cadastro de um novo usuário
 	 * @throws ValidacaoException 
+	 * 			caso ocorra alguma inconsistência nos dados recebidos, é lançada uma exceção de validação
 	 */
 	@PostMapping()
 	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@Valid @RequestBody CadastroUsuarioDTO novoUsuario) throws ValidacaoException{

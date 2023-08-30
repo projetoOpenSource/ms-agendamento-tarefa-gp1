@@ -24,8 +24,10 @@ public class CadastroService {
 
 	/**
 	 * Método de cadastro de usuário
-	 * @param dto
-	 * @throws ValidacaoException
+	 * @param dto 
+	 * 			parâmetro que recebe os dados para cadastrar um novo usuário
+	 * @throws ValidacaoException 
+	 * 			caso ocorra alguma inconsistência nos dados recebidos, é lançada uma exceção de validação
 	 */
 	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) throws ValidacaoException {
 		

@@ -14,6 +14,11 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entidade que representa um usário
+ * @author moriartynho
+ *
+ */
 @Entity
 @Table(name = "usuario")
 @AllArgsConstructor

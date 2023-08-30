@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 
+/**
+ * Classe intermediária de erros ocorridos durante operações no sistema
+ * @author moriartynho
+ *
+ */
 @ControllerAdvice
 public class ResolveExceptionHandler {
 	

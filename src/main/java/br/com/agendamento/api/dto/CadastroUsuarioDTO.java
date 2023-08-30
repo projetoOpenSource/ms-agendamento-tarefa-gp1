@@ -8,7 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-
+/**
+ * Classe de trabsferência de dados que recebe os dados para o cadastro de um novo usuário
+ * @author moriartynho
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
