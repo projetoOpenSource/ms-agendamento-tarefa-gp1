@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.agendamento.api.dto.CadastroUsuarioDTO;
+import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.model.Usuario;
 import br.com.agendamento.api.repository.UsuarioRepository;
@@ -28,7 +29,7 @@ public class CadastroService {
 	 */
 	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) throws ValidacaoException {
 		
-		if (repository.existsByEmail(dto.getEmail())) {
+		if (verificaSeOEmailJaEstaCadastrado(dto.getEmail())) {
 			throw new ValidacaoException("Email já cadastrado");
 		}
 		
@@ -36,8 +37,22 @@ public class CadastroService {
 			throw new ValidacaoException("Senhas não coincidem");
 		}
 		
-		Usuario obj = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), 1L);
-		repository.save(obj);
+		try {
+			Usuario obj = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), 1L);
+			repository.save(obj);
+		} catch (Exception e) {
+			throw new InternalErrorException("Ocorreu um erro ao tentar acessar o banco de dados");
+		}
+		
+	}
+	
+	
+	public boolean verificaSeOEmailJaEstaCadastrado(String email) {
+		try {
+			return repository.existsByEmail(email);
+		} catch (Exception e) {
+			throw new InternalErrorException("Ocorreu um erro interno");
+		}
 	}
 
 }
