@@ -7,11 +7,16 @@ import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Classe de transferência que retorna os dados de um usuário
+ * @author moriartynho
+ *
+ */
 @Data
 @AllArgsConstructor
 public class UsuarioDTO {
 
-	private Long id_usuario;
+	private Long idUsuario;
 
 	@NotBlank(message = "Nome não pode ser nulo")
 	@Max(value = 50, message = "Nome não pode ter mais que 50 caracteres")
@@ -24,6 +29,6 @@ public class UsuarioDTO {
 	@NotBlank(message = "Insira uma senha válida")
 	private String senha;
 
-	private Long id_status;
+	private Long idStatus;
 
 }

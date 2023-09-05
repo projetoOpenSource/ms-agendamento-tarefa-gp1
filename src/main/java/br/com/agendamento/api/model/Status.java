@@ -2,6 +2,8 @@ package br.com.agendamento.api.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +12,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entidade que representa status de usuários e tarefas
+ * @author moriartynho
+ */
 @Entity
 @Table(name = "status")
 @AllArgsConstructor
@@ -19,11 +25,14 @@ import lombok.Setter;
 public class Status {
 
 	@Id
-	@Column(name="id_status")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_status")
 	private Long idStatus;
-	
+
 	@Column(name = "tipo_status")
 	private String tipoStatus;
-	
+
+	@Column(name = "status")
 	private String status;
+
 }

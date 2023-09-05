@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -16,6 +18,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entidade que representa um usário
+ * @author moriartynho
+ *
+ */
 @Entity
 @Table(name = "usuario")
 @AllArgsConstructor
@@ -41,10 +48,8 @@ public class Usuario {
 	@Size(max = 100, message = "Senha não pode ter mais que 100 caracteres")
 	private String senha;
 	
-//	@NotNull
-//	@Column(name = "id_status")
-//	private Long idStatus;
-	
+	@ManyToOne
+	@JoinColumn(name = "tipo_status")
 	private Status status;
 	
 
