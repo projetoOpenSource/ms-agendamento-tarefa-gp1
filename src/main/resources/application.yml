@@ -10,9 +10,6 @@ management:
     web:
       exposure:
         include:
-          - "*"
-      #Caso você queira que todos os endpoints não venham habilitados por default, você pode adicionar a seguinte linha:
-      #enabled-by-default:
 server:
   compression:
     enabled: true
