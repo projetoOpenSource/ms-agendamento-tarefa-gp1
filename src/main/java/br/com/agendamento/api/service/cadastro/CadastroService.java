@@ -5,11 +5,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.agendamento.api.constantes.ConstanteStatus;
 import br.com.agendamento.api.dto.CadastroUsuarioDTO;
 import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
+import br.com.agendamento.api.model.Status;
 import br.com.agendamento.api.model.Usuario;
-import br.com.agendamento.api.repository.StatusRepository;
 import br.com.agendamento.api.repository.UsuarioRepository;
 
 /**
@@ -24,7 +25,8 @@ public class CadastroService {
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
-	private StatusRepository statusRepository;
+	private StatusService statusService;
+	
 
 	/**
 	 * Método de cadastro de usuário
@@ -43,8 +45,9 @@ public class CadastroService {
 			throw new ValidacaoException("Senhas não coincidem");
 		}
 		
+		Status status = statusService.buscarStatusUsuario(ConstanteStatus.USUARIO_NOVO);
 		try {
-			Usuario obj = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), statusRepository.getOne(1L));
+			Usuario obj = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), status);
 			usuarioRepository.save(obj);
 		} catch (Exception e) {
 			throw new InternalErrorException("Ocorreu um erro ao tentar acessar o banco de dados");
