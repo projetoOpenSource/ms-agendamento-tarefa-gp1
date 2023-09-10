@@ -11,6 +11,7 @@ import org.springframework.web.bind.*;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.agendamento.api.exceptions.InternalErrorException;
+import br.com.agendamento.api.exceptions.MailErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 
 /**
@@ -94,6 +95,21 @@ public class ResolveExceptionHandler {
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ResponseMessageError> handleValidateException(MethodArgumentNotValidException e, HttpServletRequest request){
+		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
+	} 
+	
+	/**
+	 * 
+	 *	Captura as exceções do MailErrorException
+	 * @param e
+	 *            exceção que ocorreu ao axecutar alguma ação no sistema
+	 * @param request
+	 *            O contêiner do servlet cria um HttpServletRequest objeto e o passa como um argumento para os métodos de serviço do servlet
+	 *            ( doGet, doPost, etc).
+	 * @return ResponseEntity<ResponseMessageError>
+	 */
+	@ExceptionHandler(MailErrorException.class)
+	public ResponseEntity<ResponseMessageError> handleMailErrorException(MailErrorException e, HttpServletRequest request){
 		return popularResponseMessageError(e, HttpStatus.BAD_REQUEST.value(), e.getMessage(), request);
 	} 
 

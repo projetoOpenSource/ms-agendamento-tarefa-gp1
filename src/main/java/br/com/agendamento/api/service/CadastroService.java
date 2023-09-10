@@ -1,4 +1,4 @@
-package br.com.agendamento.api.service.cadastro;
+package br.com.agendamento.api.service;
 
 import javax.validation.Valid;
 

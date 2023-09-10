@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.agendamento.api.dto.CadastroUsuarioDTO;
 import br.com.agendamento.api.dto.UsuarioDTO;
 import br.com.agendamento.api.exceptions.ValidacaoException;
-import br.com.agendamento.api.service.cadastro.CadastroService;
+import br.com.agendamento.api.service.CadastroService;
 import io.swagger.annotations.Api;
 
 /**
