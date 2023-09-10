@@ -2,7 +2,6 @@ package br.com.agendamento.api.controller;
 
 import javax.validation.Valid;
 
-import br.com.agendamento.api.exceptions.InternalErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +41,7 @@ public class UsuarioController {
 	 * 			caso ocorra alguma inconsistência nos dados recebidos, é lançada uma exceção de validação
 	 */
 	@PostMapping()
-	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@Valid @RequestBody CadastroUsuarioDTO novoUsuario) throws ValidacaoException, InternalErrorException {
+	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@Valid @RequestBody CadastroUsuarioDTO novoUsuario) throws ValidacaoException{
 		cadastroService.cadastrarUsuario(novoUsuario);
 		return ResponseEntity.ok().build();
 	}

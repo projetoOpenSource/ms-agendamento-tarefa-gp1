@@ -1,5 +1,6 @@
 package br.com.agendamento.api.service.cadastro;
 
+import br.com.agendamento.api.constantes.ConstantTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +26,7 @@ public class StatusService {
 		return buscarPorStatusETipoStatus(ConstanteStatus.TIPO_USUARIO, status);
 	}
 
+	public Status buscarStatusTarefa(String statusTarefa) throws ValidacaoException {
+		return buscarPorStatusETipoStatus(ConstantTask.TIPO_TAREFA, statusTarefa);
+	}
 }

@@ -35,7 +35,7 @@ public class CadastroService {
 	 * @throws ValidacaoException 
 	 * 			caso ocorra alguma inconsistência nos dados recebidos, é lançada uma exceção de validação
 	 */
-	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) throws ValidacaoException, InternalErrorException {
+	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) throws ValidacaoException {
 		
 		if (verificaSeOEmailJaEstaCadastrado(dto.getEmail())) {
 			throw new ValidacaoException("Email já cadastrado");
@@ -56,7 +56,7 @@ public class CadastroService {
 	}
 	
 	
-	public boolean verificaSeOEmailJaEstaCadastrado(String email) throws InternalErrorException {
+	public boolean verificaSeOEmailJaEstaCadastrado(String email) {
 		try {
 			return usuarioRepository.existsByEmail(email);
 		} catch (Exception e) {

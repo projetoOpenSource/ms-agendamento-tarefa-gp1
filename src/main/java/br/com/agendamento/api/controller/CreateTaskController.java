@@ -4,7 +4,7 @@ import br.com.agendamento.api.dto.CreateTaskDto;
 import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.model.CreateTaskModel;
-import br.com.agendamento.api.service.CreateTaskService;
+import br.com.agendamento.api.service.cadastro.CreateTaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

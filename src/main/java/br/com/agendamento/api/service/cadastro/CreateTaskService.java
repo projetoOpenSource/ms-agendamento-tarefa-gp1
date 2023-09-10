@@ -1,11 +1,13 @@
-package br.com.agendamento.api.service;
+package br.com.agendamento.api.service.cadastro;
 
+import br.com.agendamento.api.constantes.ConstantTask;
 import br.com.agendamento.api.dto.CreateTaskDto;
 import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.model.CreateTaskModel;
 import br.com.agendamento.api.model.Status;
 import br.com.agendamento.api.repository.CreateTaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +25,9 @@ public class CreateTaskService {
 
     final CreateTaskRepository createTaskRepository;
 
+    @Autowired
+    private StatusService statusService;
+
     public CreateTaskService(CreateTaskRepository createTaskRepository) {
         this.createTaskRepository = createTaskRepository;
     }
@@ -32,8 +37,11 @@ public class CreateTaskService {
         if (createTaskDto.getDataVencimento().isBefore(LocalDateTime.now()) || createTaskDto.getDataVencimento().equals(LocalDateTime.now())){
             throw new ValidacaoException("A data não pode ser menor ou igual a data atual!");
         }
+
+        Status status = statusService.buscarStatusTarefa(ConstantTask.TAREFA_ATIVA);
+
         CreateTaskModel obj = new CreateTaskModel(null, createTaskDto.getTitulo(), createTaskDto.getDescricao(),
-                       createTaskDto.getDataVencimento(), LocalDateTime.now(), false, new Status());
+                       createTaskDto.getDataVencimento(), LocalDateTime.now(), false, status);
         try {
             return createTaskRepository.save(obj);
         }

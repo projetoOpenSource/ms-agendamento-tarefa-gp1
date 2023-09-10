@@ -33,6 +33,7 @@ public class CreateTaskModel implements Serializable {
     private LocalDateTime dataCadastro;
     @Column(nullable = false)
     private Boolean tarefaConcluida;
-    @Column(name = "id_status")
+    @ManyToOne
+    @JoinColumn(name = "id_status", referencedColumnName = "id_status")
     private Status idStatus;
 }
