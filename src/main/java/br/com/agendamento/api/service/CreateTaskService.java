@@ -4,6 +4,7 @@ import br.com.agendamento.api.dto.CreateTaskDto;
 import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.model.CreateTaskModel;
+import br.com.agendamento.api.model.Status;
 import br.com.agendamento.api.repository.CreateTaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,8 @@ public class CreateTaskService {
         if (createTaskDto.getDataVencimento().isBefore(LocalDateTime.now()) || createTaskDto.getDataVencimento().equals(LocalDateTime.now())){
             throw new ValidacaoException("A data não pode ser menor ou igual a data atual!");
         }
-        CreateTaskModel obj = new CreateTaskModel(null, createTaskDto.getTitulo(), createTaskDto.getDescricao(), createTaskDto.getDataVencimento(), LocalDateTime.now(), false, 1L);
+        CreateTaskModel obj = new CreateTaskModel(null, createTaskDto.getTitulo(), createTaskDto.getDescricao(),
+                       createTaskDto.getDataVencimento(), LocalDateTime.now(), false, new Status());
         try {
             return createTaskRepository.save(obj);
         }

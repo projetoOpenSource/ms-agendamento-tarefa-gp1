@@ -34,5 +34,5 @@ public class CreateTaskModel implements Serializable {
     @Column(nullable = false)
     private Boolean tarefaConcluida;
     @Column(name = "id_status")
-    private Long idStatus;
+    private Status idStatus;
 }
