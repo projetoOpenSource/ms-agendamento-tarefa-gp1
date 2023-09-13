@@ -8,6 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classe de transferência de dados para confirmação de cadastro
+ * @author moriartynho
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

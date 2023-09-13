@@ -48,6 +48,12 @@ public class UsuarioController {
 		return ResponseEntity.ok().build();
 	}
 
+	/**
+	 * Endpoint para validar cadastro do usuário
+	 * @param confirmacaoDTO
+	 * @return
+	 * @throws ValidacaoException
+	 */
 	@PostMapping("/validar-cadastro")
 	public ResponseEntity<Object> validarCadastroDoUsuario(@RequestBody ConfirmacaoPorEmailDTO confirmacaoDTO) throws ValidacaoException {
 		cadastroService.validarCadastroDoUsuario(confirmacaoDTO);

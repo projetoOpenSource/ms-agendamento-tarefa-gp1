@@ -16,6 +16,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Classe de modelo que represeenta o token de validação de um usuário
+ * @author moriartynho
+ */
 @Entity
 @Table(name = "usuario_token")
 @NoArgsConstructor

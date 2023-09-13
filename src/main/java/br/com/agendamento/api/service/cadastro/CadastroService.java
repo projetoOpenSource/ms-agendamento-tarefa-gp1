@@ -73,6 +73,11 @@ public class CadastroService {
 
 	}
 
+	/**
+	 * Método de validação de cadastro do usuário
+	 * @param confirmacaoDTO
+	 * @throws ValidacaoException
+	 */
 	public void validarCadastroDoUsuario(ConfirmacaoPorEmailDTO confirmacaoDTO) throws ValidacaoException {
 
 		if (!verificaSeOEmailJaEstaCadastrado(confirmacaoDTO.getEmail())) {

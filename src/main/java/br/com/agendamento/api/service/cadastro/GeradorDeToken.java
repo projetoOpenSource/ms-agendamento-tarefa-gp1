@@ -6,11 +6,19 @@ import org.springframework.stereotype.Service;
 
 import br.com.agendamento.api.constantes.ConstanteToken;
 
+/**
+ * Classe de serviço de geração de token de validação
+ * @author moriartynho
+ */
 @Service
 public class GeradorDeToken {
 
 	
 
+	/**
+	 * Método estático que retorna um token alfanumérico aleatório de n caracteres
+	 * @return String
+	 */
 	public static String generateToken() {
 		SecureRandom random = new SecureRandom();
 		StringBuilder token = new StringBuilder();
