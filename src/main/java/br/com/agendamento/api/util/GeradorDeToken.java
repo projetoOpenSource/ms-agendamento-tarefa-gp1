@@ -1,4 +1,4 @@
-package br.com.agendamento.api.service.cadastro;
+package br.com.agendamento.api.util;
 
 import java.security.SecureRandom;
 
@@ -19,7 +19,7 @@ public class GeradorDeToken {
 	 * Método estático que retorna um token alfanumérico aleatório de n caracteres
 	 * @return String
 	 */
-	public static String generateToken() {
+	public static String gerarToken() {
 		SecureRandom random = new SecureRandom();
 		StringBuilder token = new StringBuilder();
 

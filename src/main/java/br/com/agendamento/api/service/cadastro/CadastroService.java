@@ -20,6 +20,7 @@ import br.com.agendamento.api.repository.UsuarioRepository;
 import br.com.agendamento.api.repository.UsuarioTokenRepository;
 import br.com.agendamento.api.service.StatusService;
 import br.com.agendamento.api.service.email.EmailService;
+import br.com.agendamento.api.util.GeradorDeToken;
 
 /**
  * Classe de serviço responsável por cadastrar um usuário
@@ -61,7 +62,7 @@ public class CadastroService {
 		Status status = statusService.buscarStatusUsuario(ConstanteStatus.USUARIO_NOVO);
 		try {
 			Usuario usuario = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), status);
-			UsuarioToken token = new UsuarioToken(null, GeradorDeToken.generateToken(),
+			UsuarioToken token = new UsuarioToken(null, GeradorDeToken.gerarToken(),
 					LocalDateTime.now().plusMinutes(ConstanteToken.TEMPO_DE_EXPIRACAO), usuario);
 			usuarioRepository.save(usuario);
 			tokenRepository.save(token);
@@ -90,7 +91,7 @@ public class CadastroService {
 			UsuarioToken token = tokenRepository.findByUsuario(usuario);
 
 			if (LocalDateTime.now().isAfter(token.getDataExpiracao())) {
-				String novoCodigo = GeradorDeToken.generateToken();
+				String novoCodigo = GeradorDeToken.gerarToken();
 				token.setCodigoConfirmacao(novoCodigo);
 				tokenRepository.save(token);
 				emailService.enviarEmailComToken(usuario.getEmail(), token.getCodigoConfirmacao());
