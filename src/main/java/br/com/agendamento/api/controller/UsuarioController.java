@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.agendamento.api.dto.CadastroUsuarioDTO;
+import br.com.agendamento.api.dto.ConfirmacaoPorEmailDTO;
 import br.com.agendamento.api.dto.UsuarioDTO;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.service.cadastro.CadastroService;
@@ -31,18 +32,31 @@ public class UsuarioController {
 	@Autowired
 	private CadastroService cadastroService;
 
-	
 	/**
 	 * 
 	 * Endpoint para cadastrar um usuário
-	 * @param novoUsuario 
-	 * 			Recebe um objeto com dados para o cadastro de um novo usuário
-	 * @throws ValidacaoException 
-	 * 			caso ocorra alguma inconsistência nos dados recebidos, é lançada uma exceção de validação
+	 * 
+	 * @param novoUsuario Recebe um objeto com dados para o cadastro de um novo
+	 *                    usuário
+	 * @throws ValidacaoException caso ocorra alguma inconsistência nos dados
+	 *                            recebidos, é lançada uma exceção de validação
 	 */
 	@PostMapping()
-	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@Valid @RequestBody CadastroUsuarioDTO novoUsuario) throws ValidacaoException{
+	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@Valid @RequestBody CadastroUsuarioDTO novoUsuario)
+			throws ValidacaoException {
 		cadastroService.cadastrarUsuario(novoUsuario);
+		return ResponseEntity.ok().build();
+	}
+
+	/**
+	 * Endpoint para validar cadastro do usuário
+	 * @param confirmacaoDTO
+	 * @return
+	 * @throws ValidacaoException
+	 */
+	@PostMapping("/validar-cadastro")
+	public ResponseEntity<UsuarioDTO> validarCadastroDoUsuario(@RequestBody ConfirmacaoPorEmailDTO confirmacaoDTO) throws ValidacaoException {
+		cadastroService.validarCadastroDoUsuario(confirmacaoDTO);
 		return ResponseEntity.ok().build();
 	}
 
