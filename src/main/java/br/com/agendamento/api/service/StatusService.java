@@ -1,4 +1,4 @@
-package br.com.agendamento.api.service.cadastro;
+package br.com.agendamento.api.service;
 
 import br.com.agendamento.api.constantes.ConstantTask;
 import org.springframework.beans.factory.annotation.Autowired;
