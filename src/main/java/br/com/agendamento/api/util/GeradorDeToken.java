@@ -1,6 +1,7 @@
 package br.com.agendamento.api.util;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,9 @@ public class GeradorDeToken {
 		}
 
 		return token.toString();
+	}
+	
+	public static LocalDateTime atualizarTempoDeExpiracao() {
+		return LocalDateTime.now().plusMinutes(ConstanteToken.TEMPO_DE_EXPIRACAO);
 	}
 }

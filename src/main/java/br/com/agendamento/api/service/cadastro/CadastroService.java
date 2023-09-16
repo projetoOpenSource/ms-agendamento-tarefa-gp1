@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.agendamento.api.constantes.ConstanteStatus;
-import br.com.agendamento.api.constantes.ConstanteToken;
 import br.com.agendamento.api.dto.CadastroUsuarioDTO;
 import br.com.agendamento.api.dto.ConfirmacaoPorEmailDTO;
 import br.com.agendamento.api.exceptions.InternalErrorException;
@@ -51,7 +50,7 @@ public class CadastroService {
 	 */
 	public void cadastrarUsuario(@Valid CadastroUsuarioDTO dto) throws ValidacaoException {
 
-		if (verificaSeOEmailJaEstaCadastrado(dto.getEmail())) {
+		if (verificaSeOEmailEstaCadastrado(dto.getEmail())) {
 			throw new ValidacaoException("Email já cadastrado");
 		}
 
@@ -62,8 +61,7 @@ public class CadastroService {
 		Status status = statusService.buscarStatusUsuario(ConstanteStatus.USUARIO_NOVO);
 		try {
 			Usuario usuario = new Usuario(null, dto.getNome(), dto.getEmail(), dto.getSenha(), status);
-			UsuarioToken token = new UsuarioToken(null, GeradorDeToken.gerarToken(),
-					LocalDateTime.now().plusMinutes(ConstanteToken.TEMPO_DE_EXPIRACAO), usuario);
+			UsuarioToken token = new UsuarioToken(null, GeradorDeToken.gerarToken(), GeradorDeToken.atualizarTempoDeExpiracao(), usuario);
 			usuarioRepository.save(usuario);
 			tokenRepository.save(token);
 			emailService.enviarEmailComToken(usuario.getEmail(), token.getCodigoConfirmacao());
@@ -81,7 +79,7 @@ public class CadastroService {
 	 */
 	public void validarCadastroDoUsuario(ConfirmacaoPorEmailDTO confirmacaoDTO) throws ValidacaoException {
 
-		if (!verificaSeOEmailJaEstaCadastrado(confirmacaoDTO.getEmail())) {
+		if (!verificaSeOEmailEstaCadastrado(confirmacaoDTO.getEmail())) {
 			throw new ValidacaoException("Usuario não encontrado na base de dados");
 		}
 
@@ -93,6 +91,7 @@ public class CadastroService {
 			if (LocalDateTime.now().isAfter(token.getDataExpiracao())) {
 				String novoCodigo = GeradorDeToken.gerarToken();
 				token.setCodigoConfirmacao(novoCodigo);
+				token.setDataExpiracao(GeradorDeToken.atualizarTempoDeExpiracao());
 				tokenRepository.save(token);
 				emailService.enviarEmailComToken(usuario.getEmail(), token.getCodigoConfirmacao());
 				throw new ValidacaoException(
@@ -114,7 +113,7 @@ public class CadastroService {
 
 	}
 
-	public boolean verificaSeOEmailJaEstaCadastrado(String email) {
+	public boolean verificaSeOEmailEstaCadastrado(String email) {
 		try {
 			return usuarioRepository.existsByEmail(email);
 		} catch (Exception e) {

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Exceção de erros internos
- * @author cpu150480
+ * @author moriartynho
  *
  */
 @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -14,6 +14,10 @@ public class InternalErrorException extends RuntimeException {
 	
 	public InternalErrorException(String msg){
 		super(msg);
+	}
+
+	public InternalErrorException(String msg, Throwable e) {
+		super(msg, e);
 	}
 	
 
