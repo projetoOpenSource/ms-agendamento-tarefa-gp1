@@ -32,6 +32,12 @@ public class RecuperacaoController {
 	@Autowired
 	private RecuperacaoService recuperacaoService;
 	
+	/**
+	 * Endpoint de solicitação de token por email
+	 * @param solicitacaoDeRecuperacaoDTO
+	 * @return
+	 * @throws ValidacaoException
+	 */
 	@PostMapping("/solicitar-token")
 	public ResponseEntity<UsuarioDTO> solicitarTokenDeRecuperacao(@Valid @RequestBody SolicitacaoDeRecuperacaoDeSenhaDTO solicitacaoDeRecuperacaoDTO)
 			throws ValidacaoException {
@@ -39,6 +45,11 @@ public class RecuperacaoController {
 		return ResponseEntity.ok().build();
 	}
 	
+	/**
+	 * Endpoint para confirmação de token enviado por email e alteração de senha
+	 * @param recuperacaoDTO
+	 * @return
+	 */
 	@PostMapping("/recuperar-senha")
 	public ResponseEntity<UsuarioDTO> recuperarEAlterarSenhaComToken(@Valid @RequestBody RecuperacaoDeSenhaDTO recuperacaoDTO){
 		recuperacaoService.recuperarEAlterarSenhaComToken(recuperacaoDTO);

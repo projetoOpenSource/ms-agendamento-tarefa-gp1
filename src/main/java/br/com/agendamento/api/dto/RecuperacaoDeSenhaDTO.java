@@ -8,6 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classe de transferência de dados para recuperação de senha através de token
+ * @author moriartynho
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

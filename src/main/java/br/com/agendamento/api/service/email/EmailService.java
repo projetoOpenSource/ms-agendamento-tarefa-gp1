@@ -22,6 +22,12 @@ public class EmailService {
 	@Value("${spring.mail.username}")
 	private String emailRemetente;
 
+	/**
+	 * Método que envia token de confirmação para o email do usuário
+	 * @param emailUsuario
+	 * @param codigoConfirmacao
+	 * @throws MailErrorException
+	 */
 	public void enviarEmailComToken(String emailUsuario, String codigoConfirmacao) throws MailErrorException {
 		StringBuilder corpoDoEmail = new StringBuilder();
 
@@ -32,6 +38,12 @@ public class EmailService {
 		enviarEmail(emailUsuario, "Boas vindas", corpoDoEmail.toString());
 	}
 
+	/**
+	 * Método que envia token de recuperaçãp para o email do usuário
+	 * @param emailUsuario
+	 * @param codigoConfirmacao
+	 * @throws MailErrorException
+	 */
 	public void enviarEmailDeRecuperacao(String emailUsuario, String codigoConfirmacao) throws MailErrorException {
 		StringBuilder corpoDoEmail = new StringBuilder();
 
@@ -43,6 +55,13 @@ public class EmailService {
 
 	}
 
+	/**
+	 * Método utilizado para enviar email
+	 * @param emailDestinatario
+	 * @param assuntoDoEmail
+	 * @param textoDoEmail
+	 * @throws MailErrorException
+	 */
 	public void enviarEmail(String emailDestinatario, String assuntoDoEmail, String textoDoEmail)
 			throws MailErrorException {
 		SimpleMailMessage message = new SimpleMailMessage();

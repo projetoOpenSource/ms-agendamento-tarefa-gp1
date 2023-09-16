@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classe de transferência de dados para solicitação de token
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -60,6 +60,10 @@ public class RecuperacaoService {
 		}
 	}
 
+	/**
+	 * Método para alteração de senha através de token
+	 * @param recuperacaoDTO
+	 */
 	public void recuperarEAlterarSenhaComToken(@Valid RecuperacaoDeSenhaDTO recuperacaoDTO) {
 
 		try {
@@ -75,6 +79,10 @@ public class RecuperacaoService {
 
 	}
 
+	/*
+	 * Método para validação de dados na recuperação e alteração de senha
+	 * @param recuperacaoDTO, usuario, token
+	 */
 	private void validarRecuperacaoDeSenha(RecuperacaoDeSenhaDTO recuperacaoDTO, Usuario usuario, UsuarioToken token)
 			throws ValidacaoException, MailErrorException {
 
@@ -98,10 +106,16 @@ public class RecuperacaoService {
 
 	}
 
+	/**
+	 * Método que envia o token de recuperação ao usuário. O token é atualizando antes de ser enviado
+	 * @param usuario
+	 * @throws MailErrorException
+	 */
 	private void pegarTokenPorUsuarioAtualizarEEnviarPorEmail(Usuario usuario) throws MailErrorException {
 		try {
 			UsuarioToken token = tokenRepository.findByUsuario(usuario);
 			token.setCodigoConfirmacao(GeradorDeToken.gerarToken());
+			token.setDataExpiracao(GeradorDeToken.atualizarTempoDeExpiracao());
 			tokenRepository.save(token);
 			emailService.enviarEmailDeRecuperacao(usuario.getEmail(), token.getCodigoConfirmacao());
 		} catch (Exception e) {
