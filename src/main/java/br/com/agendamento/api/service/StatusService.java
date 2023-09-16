@@ -25,4 +25,7 @@ public class StatusService {
 		return buscarPorStatusETipoStatus(ConstanteStatus.TIPO_USUARIO, status);
 	}
 
+	public Status buscarStatusTarefa(String statusTarefa) throws ValidacaoException {
+		return buscarPorStatusETipoStatus(ConstanteStatus.TIPO_TAREFA, statusTarefa);
+	}
 }
