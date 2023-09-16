@@ -19,16 +19,49 @@ public class EmailService {
 	@Autowired
 	private JavaMailSender mailSender;
 
-
 	@Value("${spring.mail.username}")
 	private String emailRemetente;
 
+	/**
+	 * Método que envia token de confirmação para o email do usuário
+	 * @param emailUsuario
+	 * @param codigoConfirmacao
+	 * @throws MailErrorException
+	 */
 	public void enviarEmailComToken(String emailUsuario, String codigoConfirmacao) throws MailErrorException {
-		enviarEmail(emailUsuario, "Boas vindas",
-				"Seja bem-vindo ao nosso sistema de agendamento de tarefas. Para continuar, por favor confirme o seu cadastro. Seu código de confirmação é: \n"
-						+ codigoConfirmacao);
+		StringBuilder corpoDoEmail = new StringBuilder();
+
+		corpoDoEmail.append(
+				"Seja bem-vindo ao nosso sistema de agendamento de tarefas. Para continuar, por favor confirme o seu cadastro. Seu código de confirmação é: ");
+		corpoDoEmail.append(codigoConfirmacao);
+
+		enviarEmail(emailUsuario, "Boas vindas", corpoDoEmail.toString());
 	}
 
+	/**
+	 * Método que envia token de recuperaçãp para o email do usuário
+	 * @param emailUsuario
+	 * @param codigoConfirmacao
+	 * @throws MailErrorException
+	 */
+	public void enviarEmailDeRecuperacao(String emailUsuario, String codigoConfirmacao) throws MailErrorException {
+		StringBuilder corpoDoEmail = new StringBuilder();
+
+		corpoDoEmail.append("Use o código ");
+		corpoDoEmail.append(codigoConfirmacao);
+		corpoDoEmail.append(" para recuperar e alterar sua senha");
+
+		enviarEmail(emailUsuario, "Recuperar/Alterar Senha", corpoDoEmail.toString());
+
+	}
+
+	/**
+	 * Método utilizado para enviar email
+	 * @param emailDestinatario
+	 * @param assuntoDoEmail
+	 * @param textoDoEmail
+	 * @throws MailErrorException
+	 */
 	public void enviarEmail(String emailDestinatario, String assuntoDoEmail, String textoDoEmail)
 			throws MailErrorException {
 		SimpleMailMessage message = new SimpleMailMessage();
