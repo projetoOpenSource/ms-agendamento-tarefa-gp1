@@ -36,4 +36,7 @@ public class CreateTaskModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_status", referencedColumnName = "id_status")
     private Status idStatus;
+    @ManyToMany
+    @JoinColumn(name = "id_usuario")
+    private String idUsuario;
 }
