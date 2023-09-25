@@ -26,7 +26,7 @@ public class CreateTaskService {
     final CreateTaskRepository createTaskRepository;
 
     @Autowired
-    private StatusService statusService;
+    private final StatusService statusService;
 
     public CreateTaskService(CreateTaskRepository createTaskRepository, StatusService statusService) {
         this.createTaskRepository = createTaskRepository;
