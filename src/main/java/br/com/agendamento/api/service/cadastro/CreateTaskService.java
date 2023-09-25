@@ -25,11 +25,16 @@ public class CreateTaskService {
 
     final CreateTaskRepository createTaskRepository;
 
+    /**
+     * Status do Serviço.
+     * @author LeoVizeu
+     */
     @Autowired
     private StatusService statusService;
 
     public CreateTaskService(CreateTaskRepository createTaskRepository) {
         this.createTaskRepository = createTaskRepository;
+        this.statusService = statusServicce;
     }
 
 
