@@ -6,7 +6,6 @@ import br.com.agendamento.api.exceptions.InternalErrorException;
 import br.com.agendamento.api.exceptions.ValidacaoException;
 import br.com.agendamento.api.model.CreateTaskModel;
 import br.com.agendamento.api.model.Status;
-import br.com.agendamento.api.model.Usuario;
 import br.com.agendamento.api.repository.CreateTaskRepository;
 import br.com.agendamento.api.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
