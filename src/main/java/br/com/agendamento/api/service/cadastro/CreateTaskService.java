@@ -28,8 +28,9 @@ public class CreateTaskService {
     @Autowired
     private StatusService statusService;
 
-    public CreateTaskService(CreateTaskRepository createTaskRepository) {
+    public CreateTaskService(CreateTaskRepository createTaskRepository, StatusService statusService) {
         this.createTaskRepository = createTaskRepository;
+        this.statusService = statusService;
     }
 
     @Transactional
