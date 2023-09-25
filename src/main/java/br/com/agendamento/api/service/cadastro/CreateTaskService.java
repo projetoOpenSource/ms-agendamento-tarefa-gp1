@@ -26,12 +26,12 @@ public class CreateTaskService {
     final CreateTaskRepository createTaskRepository;
 
     @Autowired
-    private final StatusService statusService;
+    private StatusService statusService;
 
-    public CreateTaskService(CreateTaskRepository createTaskRepository, StatusService statusService) {
+    public CreateTaskService(CreateTaskRepository createTaskRepository) {
         this.createTaskRepository = createTaskRepository;
-        this.statusService = statusService;
     }
+
 
     @Transactional
     public void cadastrarTarefa(CreateTaskDto createTaskDto) throws ValidacaoException, InternalErrorException {
