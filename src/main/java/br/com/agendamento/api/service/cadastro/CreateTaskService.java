@@ -32,9 +32,9 @@ public class CreateTaskService {
     @Autowired
     private StatusService statusService;
 
-    public CreateTaskService(CreateTaskRepository createTaskRepository) {
+    public CreateTaskService(CreateTaskRepository createTaskRepository StatusService) {
         this.createTaskRepository = createTaskRepository;
-        this.statusService = statusServicce;
+        this.statusService = StatusService;
     }
 
 
