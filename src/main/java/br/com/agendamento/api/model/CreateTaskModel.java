@@ -37,8 +37,8 @@ public class CreateTaskModel implements Serializable {
     @JoinColumn(name = "id_status", referencedColumnName = "id_status")
     private Status idStatus;
     @ManyToMany
-    @JoinTable(name = "usuario_agendamento_tarefa"),
-        joinColumns = @JoinColumn(name = "id_agendamento_tarefa"),
-        inverseJoinColumns = @JoinColumn(name = "id_usuario")
+    @JoinTable(name = "usuario_agendamento_tarefa",
+    joinColumns = @JoinColumn (name = "id_agendamento_tarefa"),
+    inverseJoinColumns = @JoinColumn(name = "id_usuario"))
     private List<Usuario> usuarios;
 }
