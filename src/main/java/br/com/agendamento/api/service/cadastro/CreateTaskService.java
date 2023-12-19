@@ -8,6 +8,7 @@ import br.com.agendamento.api.model.CreateTaskModel;
 import br.com.agendamento.api.model.Status;
 import br.com.agendamento.api.repository.CreateTaskRepository;
 import br.com.agendamento.api.service.StatusService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,14 +33,14 @@ public class CreateTaskService {
     @Autowired
     private StatusService statusService;
 
-    public CreateTaskService(CreateTaskRepository createTaskRepository StatusService) {
+    public CreateTaskService(CreateTaskRepository createTaskRepository, StatusService StatusService) {
         this.createTaskRepository = createTaskRepository;
         this.statusService = StatusService;
     }
 
 
     @Transactional
-    public void cadastrarTarefa(CreateTaskDto createTaskDto) throws ValidacaoException, InternalErrorException {
+    public void cadastrarTarefa(@NotNull CreateTaskDto createTaskDto) throws ValidacaoException, InternalErrorException {
         if (createTaskDto.getDataVencimento().isBefore(LocalDateTime.now()) || createTaskDto.getDataVencimento().equals(LocalDateTime.now())){
             throw new ValidacaoException("A data não pode ser menor ou igual a data atual!");
         }
